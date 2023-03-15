@@ -351,7 +351,7 @@ end
 
 #Une fonction qui calcule l'heuristique du noeud donné en paramètre avec la position du noeud de fin
 function heurist(node::Node,posFin::Tuple{Int64,Int64})
-    return sqrt((posFin[1] - node.pos[1]) * (posFin[1] - node.pos[1]) + (posFin[2] - node.pos[2]) * (posFin[2] - node.pos[2]))
+    return sqrt((posFin[1] - node.pos[1]) * (posFin[1] - node.pos[1])) + sqrt((posFin[2] - node.pos[2]) * (posFin[2] - node.pos[2]))
 end
 
 #Une fonction qui détermine le noeud ayant l'heuristique la plus faible parmis l'ensemble donné en paramètre
@@ -602,6 +602,7 @@ function aStarAlgo(fichier::String,deb::Tuple{Int64,Int64},fin::Tuple{Int64,Int6
             print("L'algorithme a évalué ")
             print(it)
             print(" état.s")
+            
             affichChemin(CheminOpt,matrixCol,NodeD,NodeF)
 
         end
