@@ -154,20 +154,20 @@ function voisin(mat::Matrix{Node},coord::Tuple{Int64,Int64})
     n = height(mat)
     m = width(mat)
     if(mat[coord[1],coord[2]].type != 'T')
-        if(coord[1] >1)
+        if(coord[1] >1 && mat[coord[1]-1,coord[2]].type !='T')
             a = mat[coord[1]-1,coord[2]]
-            if(coord[1] < n)
+            if(coord[1] < n && mat[coord[1]+1,coord[2]].type !='T')
                 b = mat[coord[1]+1,coord[2]]
-                if(coord[2] > 1)
+                if(coord[2] > 1 && mat[coord[1],coord[2]-1].type !='T')
                     c = mat[coord[1],coord[2]-1]
-                    if(coord[2] < m)
+                    if(coord[2] < m && mat[coord[1],coord[2]+1].type !='T')
                         d = mat[coord[1],coord[2]+1]
                         return voisin = [a b c d]
                     else
                         return voisin = [a b c]
                     end
                 else
-                    if(coord[2] < m)
+                    if(coord[2] < m && mat[coord[1],coord[2]+1].type !='T')
                         d = mat[coord[1],coord[2]+1]
                         return voisin = [a b d]
                     else
@@ -175,16 +175,16 @@ function voisin(mat::Matrix{Node},coord::Tuple{Int64,Int64})
                     end
                 end
             else
-                if(coord[2] > 1)
+                if(coord[2] > 1 && mat[coord[1],coord[2]-1].type !='T')
                     c = mat[coord[1],coord[2]-1]
-                    if(coord[2] < m)
+                    if(coord[2] < m && mat[coord[1]-1,coord[2]+1].type !='T')
                         d = mat[coord[1],coord[2]+1]
                         return voisin = [a c d]
                     else
                         return voisin = [a c]
                     end
                 else
-                    if(coord[2] < m)
+                    if(coord[2] < m && mat[coord[1],coord[2]+1].type !='T')
                         d = mat[coord[1],coord[2]+1]
                         return voisin = [a  d]
                     else
@@ -193,18 +193,18 @@ function voisin(mat::Matrix{Node},coord::Tuple{Int64,Int64})
                 end
             end
         else
-            if(coord[1] < n)
+            if(coord[1] < n && mat[coord[1]+1,coord[2]].type !='T')
                 b = mat[coord[1]+1,coord[2]]
-                if(coord[2] > 1)
+                if(coord[2] > 1 && mat[coord[1],coord[2]-1].type !='T')
                     c = mat[coord[1],coord[2]-1]
-                    if(coord[2] < m)
+                    if(coord[2] < m && mat[coord[1],coord[2]+1].type !='T')
                         d = mat[coord[1],coord[2]+1]
                         return voisin = [b c d]
                     else
                         return voisin = [b c]
                     end
                 else
-                    if(coord[2] < m)
+                    if(coord[2] < m && mat[coord[1],coord[2]+1].type !='T')
                         d = mat[coord[1],coord[2]+1]
                         return voisin = [b d]
                     else
@@ -212,17 +212,17 @@ function voisin(mat::Matrix{Node},coord::Tuple{Int64,Int64})
                     end
                 end
             else
-                if(coord[2] > 1)
-                    c = n[coord[1],coord[2]-1]
-                    if(coord[2] < m)
-                        d = n[coord[1],coord[2]+1]
+                if(coord[2] > 1 && mat[coord[1],coord[2]-1].type !='T')
+                    c = mat[coord[1],coord[2]-1]
+                    if(coord[2] < m && mat[coord[1],coord[2]+1].type !='T')
+                        d = mat[coord[1],coord[2]+1]
                         return voisin = [c d]
                     else
                         return voisin = [c]
                     end
                 else
-                    if(coord[2] < m)
-                        d = n[coord[1],coord[2]+1]
+                    if(coord[2] < m && mat[coord[1],coord[2]+1].type !='T')
+                        d = mat[coord[1],coord[2]+1]
                         return voisin = [d]
                     else
                         return voisin = []
